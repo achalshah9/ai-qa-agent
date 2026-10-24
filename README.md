@@ -147,12 +147,5 @@ Streamlit UI
        └─ Human approval gate (demo only)
 ```
 
-## Resume wording (use only after you have run and reviewed the demo)
-
-**AI-Assisted QA Engineering Agent — Personal Proof of Concept**
-
-- Built a prototype to generate requirement-linked test cases from user stories and project-specific guidance.
-- Implemented cURL-to-RestAssured starter-code generation with configurable expected status and secret-safe auth placeholders.
-- Prototyped failure triage with suggested remediation, verification steps, and an explicit human-review gate.
 
 State clearly that this is a personal project/prototype. Do not claim production use or a live auto-PR integration unless you actually implement and verify those features.
