@@ -69,22 +69,6 @@ mvn test -DrunApiTests=true -DbaseUri="https://your-qa-host.example" -Dendpoint=
 
 Use the actual approved QA base URL and endpoint. The command intentionally requires the explicit `-DrunApiTests=true` flag so downloading or compiling a project does not automatically call an API. Never run generated negative tests against production without explicit authorization and a safe test-data plan.
 
-## Generate tests for an existing `com.restapitest` framework
-
-The API Automation tab now includes **Generate source files for your existing RestCommon framework**. Select this mode when you already have a Java + RestAssured + TestNG + Maven framework and want new endpoint tests to use its request setup rather than receiving a standalone POM and a duplicate request-specification factory.
-
-The generated source patch includes:
-
-- `constants/<Api>Constants.java` — one central place for path, HTTP method, expected status codes, request body, response JSON paths, and safe extra headers.
-- `util/RestApiHelper.java` — shared methods for getting the request specification from `RestCommon`, sending the request, asserting status codes and response paths, and producing a body variant for negative cases.
-- `<endpoint package>/<Api>Scenarios.java` — endpoint-specific TestNG cases.
-- `testng.xml.snippet` — one entry to add to the existing suite, plus integration notes and test-design documentation.
-
-This mode intentionally does **not** generate a new `pom.xml` or overwrite `RestCommon.java`. It assumes the configured `RestCommon` getter returns `io.restassured.specification.RequestSpecification`; the class name, getter name, and static/instance call can be configured in the UI. Verify them against your source before compiling. The method should return a fresh specification per call so mutable headers and body do not leak between tests.
-
-**Archive limitation:** the framework ZIP provided for this adaptation contained `pom.xml`, `testng.xml`, directory names and previous reports, but no Java source files. The generator follows the visible `com.restapitest` structure and the stated `RestCommon` pattern, but it cannot verify the exact getter method from that archive. Re-upload the ZIP with `src/test/java` and `src/main/java` `.java` files included if you want exact matching with the real helper signatures and naming conventions.
-
-The generated patch does not infer all business requirements from cURL. Validate required fields, status codes, response JSON paths and test environment against Swagger/OpenAPI or acceptance criteria. Authentication remains owned by `RestCommon`; auth values are not copied from cURL into generated test code.
 
 ## Example output for an existing RestCommon-style framework
 
@@ -111,14 +95,6 @@ You can also set `OPENAI_API_KEY` and `OPENAI_MODEL` in your environment; never 
 ```bat
 python -m unittest discover -s tests -v
 ```
-
-## Demo flow (3–5 minutes)
-
-1. Open **Test Intelligence**. Use the synthetic order story and project rules, then upload `samples/org_qa_guidelines.md` to show Markdown guidance loading/preview. Generate test cases and download CSV. In AI mode, the uploaded rules are included in the model prompt.
-2. Open **API Automation**. For your existing framework, paste the synthetic cURL, select the required fields/response paths, confirm the `RestCommon` getter and click **Generate RestCommon framework source patch ZIP**. Show the centralized constants, `RestApiHelper`, endpoint-specific TestNG class and the `testng.xml` snippet. Use the standalone Maven ZIP only when you want a separate demo project.
-3. Open **Self-Healing Lab**. Use the sample `NoSuchElementException`. Show classification, verification plan, and the review gate.
-4. Explain that real AI generation requires a configured API key. Template output must not be represented as AI-generated.
-
 ## Important limitations
 
 - This is a portfolio prototype, not a production QA platform.
@@ -146,6 +122,3 @@ Streamlit UI
        ├─ Proposed fix + verification plan
        └─ Human approval gate (demo only)
 ```
-
-
-State clearly that this is a personal project/prototype. Do not claim production use or a live auto-PR integration unless you actually implement and verify those features.
