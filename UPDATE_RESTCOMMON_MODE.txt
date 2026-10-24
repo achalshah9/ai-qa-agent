@@ -1,0 +1,25 @@
+AI QA Agent — RestCommon Framework Mode Update
+
+This update adds the existing-framework generator to the Streamlit application.
+
+FILES TO COPY INTO YOUR EXISTING ai_qa_fasttrack FOLDER
+- app.py
+- framework_generator.py (new module)
+- tests/test_qa_core.py
+- README.md
+- CHANGELOG.md
+
+SAFE UPDATE STEPS
+1. Stop Streamlit with Ctrl+C in the running Command Prompt.
+2. Back up your existing ai_qa_fasttrack folder.
+3. Extract this ZIP directly into that folder and replace the listed files when prompted.
+4. Keep your current .venv, requirements.txt, qa_core.py, .env files and sample data. This update does not require package reinstall.
+5. Start the app from that folder: .venv\Scripts\python.exe -m streamlit run app.py
+6. Open http://localhost:8501 and navigate to API Automation.
+7. Use “Generate source files for your existing RestCommon framework”. Check the configured RestCommon getter against your actual RestCommon.java before copying generated source into the framework.
+
+TESTING
+The update's Python test suite reports 19 passing tests in the packaging environment. Java output was syntax-checked against API/dependency stubs, not against your private framework source or an actual test endpoint.
+
+IMPORTANT
+The uploaded rest.api.automation ZIP lacked Java source files under src/main/java and src/test/java. The default getter RestCommon.getRequestSpecification() is therefore an assumption. Use the settings in the app to adjust the class/getter/static-ness if your real method differs.

@@ -1,0 +1,13 @@
+UPDATE AN EXISTING LOCAL COPY WITHOUT REINSTALLING PYTHON
+
+1. In the Streamlit Command Prompt window, press Ctrl+C to stop the current server.
+2. Extract AI_QA_Source_Update_v2.zip directly into your existing ai_qa_fasttrack project folder, for example:
+   C:\Users\achal\Downloads\Deloitte_AI_QA_FastTrack_Pack (1)\ai_qa_fasttrack
+3. Approve overwriting app.py, qa_core.py, and tests\test_qa_core.py if Windows asks.
+4. Open Command Prompt in that folder and run:
+   .venv\Scripts\python.exe -m unittest discover -s tests -v
+5. If all tests pass, start the application:
+   .venv\Scripts\python.exe -m streamlit run app.py
+6. Open http://localhost:8501
+
+No new Python package is required for this source update. The generated Java project itself requires JDK 17+ and Maven to compile and run; those are separate from the Streamlit app dependencies.

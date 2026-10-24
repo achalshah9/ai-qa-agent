@@ -1,0 +1,14 @@
+AI QA Engineering Agent - Windows setup
+
+1. Extract the ZIP to a folder you can write to. If you have a D: drive, you can use D:\AI_QA_Demo to save C: space.
+2. Double-click SETUP_EVERYTHING.bat.
+3. The script will look for Python 3.11+. If absent, it downloads the official Python 3.13.17 installer from python.org and installs Python for the current Windows user.
+4. It creates a local .venv, installs requirements from requirements.txt, runs the project's core tests, and launches Streamlit.
+5. Keep the black terminal window open while using the app. Open http://localhost:8501 if the browser does not open automatically.
+
+Notes:
+- Internet is required. No administrator access is requested by the script. A work/school device policy may still block installation.
+- AI API key is optional. Without one, the demo runs in clearly labeled template/rule-based mode.
+- ChatGPT subscription does not automatically include model API usage.
+- This script installs only the Python dependencies needed by the demo. It does not install a JDK/Maven because the demo generates Java starter code but does not compile or run that generated Java.
+- For a public repository, inspect the script and source code first and never add secrets or employer-owned data.
